@@ -1,8 +1,12 @@
 <resources>
     <string name="app_name">ProjetoFinal</string>
     <string name="botao">Acessar</string>
-    <string name="senha">Senha :</string>
-    <string name="novoRegistro">Novo cadastro</string>
+    <string name="senha">Senha</string>
+    <string name="novoRegistro">Cadastrar</string>
     <string name="login">Login</string>
     <string name="titulo">Viagens</string>
+    <string name="nome">Nome</string>
+    <string name="usuario">Usuário</string>
+    <string name="senhaCad">Senha</string>
+    <string name="voltar">Voltar</string>
 </resources>
