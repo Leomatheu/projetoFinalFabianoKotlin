@@ -13,9 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.projetofinal.ui.theme.ProjetoFinalTheme
-import com.example.projetofinal.ui.theme.TelaCadastro
-import com.example.projetofinal.ui.theme.TelaLogin
+import com.example.projetofinal.ui.theme.*
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,6 +47,26 @@ fun DefaultPreview() {
 
             composable("TelaCadastro"){
                 TelaCadastro(onNavigate = {navController.navigate(it)}, onBackScreen = {navController.navigateUp()})
+            }
+
+            composable("TelaMenu"){
+                TelaMenu(onNavigate = {navController.navigate(it)})
+            }
+            
+            composable("TelaNovaViagem"){
+                TelaNovaViagem(onNavigate = {navController.navigate(it)})
+            }
+            
+            composable("TelaInicial"){
+                telaInicial(onNavigate = {navController.navigate(it)})
+            }
+
+            composable("TelaSobre"){
+                telaSobre(onNavigate = {navController.navigate(it)})
+            }
+            
+            composable("TelaViagensDisp"){
+                    telaViagemDisp(onNavigate = {navController.navigate(it)})
             }
 
         }

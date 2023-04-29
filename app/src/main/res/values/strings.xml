@@ -9,4 +9,10 @@
     <string name="usuario">Usuário</string>
     <string name="senhaCad">Senha</string>
     <string name="voltar">Voltar</string>
+    <string name="destino">Destino</string>
+    <string name="dataInicial">Data início</string>
+    <string name="dataFinal">Data fim</string>
+    <string name="orcamento">Orçamento</string>
+    <string name="feito">App feito por</string>
+    <string name="eu">Leonardo Matheus</string>
 </resources>

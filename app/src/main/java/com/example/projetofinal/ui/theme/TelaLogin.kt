@@ -86,7 +86,7 @@ fun TelaLogin(onNavigate : (route: String) ->Unit) {
 
         Spacer(modifier = Modifier.size(20.dp))
 
-        Button(onClick = { onNavigate("menu") },
+        Button(onClick = { onNavigate("TelaMenu") },
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF778E6C))) {
             Text(text = stringResource(R.string.botao), color = Color.Black)
 
