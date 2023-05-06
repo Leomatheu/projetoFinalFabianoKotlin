@@ -1,5 +1,6 @@
 package com.example.projetofinal.ui.theme
 
+import android.app.Application
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 
@@ -11,28 +12,25 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.projetofinal.R
+import com.example.projetofinal.viewModel.RegistroNovoUsuarioViewModel
+import com.example.projetofinal.viewModel.RegistroNovoUsuarioViewModelFactory
 
 
 @Composable
 fun TelaCadastro(onNavigate : (route: String) ->Unit, onBackScreen:() -> Unit) {
 
-    val Novousuario = remember {
-        //lembrar da variavel
-        mutableStateOf(value = "")
-    }
-    val novoNome = remember {
-        mutableStateOf(value = "")
-    }
-    val Novasenha = remember {
-        //lembrar da variavel
-        mutableStateOf(value = "")
-    }
+    val application = LocalContext.current.applicationContext as Application
 
+    val viewModel : RegistroNovoUsuarioViewModel = viewModel(
+        factory = RegistroNovoUsuarioViewModelFactory(application)
+    )
 
     Column(
         modifier = Modifier
@@ -52,9 +50,9 @@ fun TelaCadastro(onNavigate : (route: String) ->Unit, onBackScreen:() -> Unit) {
 
             Spacer(modifier = Modifier.size(16.dp))
             OutlinedTextField(
-                value = novoNome.value,
+                value = viewModel.novoNome,
                 onValueChange = {
-                    novoNome.value = it
+                    viewModel.novoNome = it
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 modifier = Modifier.alignByBaseline()
@@ -74,9 +72,9 @@ fun TelaCadastro(onNavigate : (route: String) ->Unit, onBackScreen:() -> Unit) {
 
             Spacer(modifier = Modifier.size(5.dp))
             OutlinedTextField(
-                value = Novousuario.value,
+                value = viewModel.Novousuario,
                 onValueChange = {
-                    Novousuario.value = it
+                    viewModel.Novousuario = it
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 modifier = Modifier.alignByBaseline()
@@ -96,9 +94,9 @@ fun TelaCadastro(onNavigate : (route: String) ->Unit, onBackScreen:() -> Unit) {
 
             Spacer(modifier = Modifier.size(10.dp))
             OutlinedTextField(
-                value = Novasenha.value,
+                value = viewModel.Novasenha,
                 onValueChange = {
-                    Novasenha.value = it
+                    viewModel.Novasenha = it
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 modifier = Modifier.alignByBaseline()
@@ -107,9 +105,8 @@ fun TelaCadastro(onNavigate : (route: String) ->Unit, onBackScreen:() -> Unit) {
 
         Spacer(modifier = Modifier.size(30.dp))
 
-
         Row() {
-            Button(onClick = {},
+            Button(onClick = {viewModel.registrar()},
                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF778E6C))) {
                 Text(
                     text = stringResource(R.string.novoRegistro),
