@@ -16,4 +16,14 @@ class userRepository(private val usuarioDao: usuarioDao) {
         }
 
     }
+
+    fun deleteUsuario(usuarios: usuarios){
+        coroutine.launch(Dispatchers.IO) {
+            usuarioDao.delete(usuarios)
+        }
+    }
+
+    suspend fun buscaUsuario(): List<usuarios> {
+        return usuarioDao.selecionaTodos()
+    }
 }

@@ -5,13 +5,16 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.projetofinal.dao.novaViagemDao
 import com.example.projetofinal.dao.usuarioDao
 import com.example.projetofinal.entity.usuarios
+import com.example.projetofinal.entity.viagem
 
-@Database(entities = [usuarios::class], version = 1)
+@Database(entities = [usuarios::class, viagem::class], version = 1)
 abstract class dataBase : RoomDatabase() {
 
     abstract fun usuarioDao() : usuarioDao
+    abstract fun novaViagemDao() : novaViagemDao
 
     companion object {
         @Volatile
