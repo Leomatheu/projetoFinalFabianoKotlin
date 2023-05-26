@@ -23,5 +23,5 @@ interface usuarioDao {
     suspend fun selecionaTodos(): List<usuarios>
 
     @Query("select * from usuarios u where u.nome = :name")
-    suspend fun selecionaNome(name : String) : usuarios
+    suspend fun selecionaNome(name : String) : usuarios?
 }

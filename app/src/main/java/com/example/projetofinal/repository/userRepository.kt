@@ -26,4 +26,7 @@ class userRepository(private val usuarioDao: usuarioDao) {
     suspend fun buscaUsuario(): List<usuarios> {
         return usuarioDao.selecionaTodos()
     }
+
+    suspend fun buscaPorNome(nome: String): usuarios? =
+        usuarioDao.selecionaNome(nome)
 }

@@ -31,9 +31,8 @@ class RegistroNovoUsuarioViewModel(private val userRepository: userRepository) :
     }
 
     fun registrar() {
-        val novoUsuario = usuarios(nome = novoNome, usuario = Novousuario, senha = Novasenha)
 
-        userRepository.insereUsuario(novoUsuario)
+
         try {
             validaFields()
             val novoUsuario = usuarios(nome = novoNome, usuario = Novousuario, senha = Novasenha)

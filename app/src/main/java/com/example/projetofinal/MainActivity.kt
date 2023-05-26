@@ -8,12 +8,14 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.projetofinal.ui.theme.*
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +40,8 @@ class MainActivity : ComponentActivity() {
 fun DefaultPreview() {
     ProjetoFinalTheme {
         val navController = rememberNavController()
+        val scaffoldState = rememberScaffoldState()
+        val coroutineScope = rememberCoroutineScope()
 
         NavHost(navController = navController, startDestination = "TelaLogin") {
 
@@ -52,23 +56,26 @@ fun DefaultPreview() {
             composable("TelaMenu"){
                 TelaMenu(onNavigate = {navController.navigate(it)})
             }
-            
+
             composable("TelaNovaViagem"){
                 TelaNovaViagem(onNavigate = {navController.navigate(it)})
             }
-            
+
             composable("TelaInicial"){
-                telaInicial(onNavigate = {navController.navigate(it)})
+                telaInicial(onNavigate = {
+                    navController.navigate(it)
+                    coroutineScope.launch {scaffoldState.snackbarHostState.showSnackbar(message = "Bem vindo !")}
+                })
             }
+
 
             composable("TelaSobre"){
                 telaSobre(onNavigate = {navController.navigate(it)})
             }
-            
+
             composable("TelaViagensDisp"){
                     telaViagemDisp(onNavigate = {navController.navigate(it)})
             }
-
         }
     }
 }
