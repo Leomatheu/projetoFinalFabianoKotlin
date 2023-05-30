@@ -21,9 +21,7 @@ class LoginViewModel(private val userRepository: userRepository) : ViewModel() {
 
     fun validateLogin(onResult: (Boolean) -> Unit) {
         viewModelScope.launch {
-            Log.i("ViewModel", "nome: ${nome} senha: ${senha}")
             val usuario = userRepository.buscaPorNome(nome)
-
             val result = usuario != null && usuario.senha == senha
 
             onResult(result)

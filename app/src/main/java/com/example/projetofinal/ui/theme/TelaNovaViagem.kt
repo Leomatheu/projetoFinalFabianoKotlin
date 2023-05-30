@@ -141,7 +141,7 @@ fun TelaNovaViagem(onNavigate : (route: String) ->Unit){
                 Spacer(modifier = Modifier.size(30.dp))
 
                 Row() {
-                    Button(onClick = {},
+                    Button(onClick = {viewModel.registrar()},
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF778E6C))) {
                         Text(
                             text = stringResource(R.string.novoRegistro),

@@ -29,23 +29,15 @@ class RegistroNovaViagemViewModel(private val viagemRepository: viagemRepository
         validaViagem = destino.isNotEmpty()
 
         if (!validaViagem) {
-            throw Exception("Favor informar um destino válido !")
+            throw Exception("Viagem não cadastrada !")
         }
     }
 
     fun registrar() {
-        val viagem = viagem(destino = destino, dataInicio = dataInicio, dataFim = dataFim, orcamento = orcamento)
-
-        viagemRepository.insereViagem(viagem)
-        try {
-            validaFields()
+        viewModelScope.launch {
             val viagem = viagem(destino = destino, dataInicio = dataInicio, dataFim = dataFim, orcamento = orcamento)
             viagemRepository.insereViagem(viagem)
-            /*onSuccess()*/
-        } catch (e: Exception) {
-            viewModelScope.launch {
-                _toastMessage.emit(e.message ?: "Unknown error")
-            }
+            _toastMessage.emit("Viagem cadastrada com sucesso !")
         }
     }
 }
