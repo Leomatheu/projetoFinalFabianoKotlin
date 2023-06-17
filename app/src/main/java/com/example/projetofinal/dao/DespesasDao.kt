@@ -19,7 +19,7 @@ interface DespesasDao {
     suspend fun delete(despesas: Despesas)
 
     @Query("select * from despesas d order by d.id")
-    suspend fun selecionaTodos(): List<Despesas>
+    suspend fun selecionaTodas(): List<Despesas>
 
     @Query("select * from despesas d where d.id = :id")
     suspend fun selecionaNome(id : String) : Despesas?

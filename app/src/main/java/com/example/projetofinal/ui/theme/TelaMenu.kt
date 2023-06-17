@@ -69,15 +69,18 @@ fun TelaMenu(onNavigate : (route: String) ->Unit){
             composable("TelaInicial"){
                 telaInicial(onNavigate = {navController.navigate(it)})
             }
-
             composable("TelaNovaViagem") {
                  TelaNovaViagem(onNavigate = {navController.navigate(it)})
             }
-
             composable("TelaViagensDisp") {
-                 telaViagemDisp(onNavigate = {navController.navigate(it)})   
+                 telaViagemDisp(onNavigate = {navController.navigate("TelaDespesa")})
             }
-
+            composable("TelaDespesa") {
+                telaDespesa(onNavigate = {navController.navigate("TelaDespesaDisp")}, onBackScreen = {navController.navigate("TelaInicial")})
+            }
+            composable("TelaDespesaDisp"){
+                telaDespesaDisp()
+            }
             composable("TelaSobre") {
                 telaSobre(onNavigate = {navController.navigate(it)})
             }

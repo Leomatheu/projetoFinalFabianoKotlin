@@ -9,6 +9,7 @@ data class Despesas(
     val data : String,
     val valor : String,
     val tipo : String,
-    val descricao : String)
+    val descricao : String,
+    val codigoViagem : String)
 {
 }

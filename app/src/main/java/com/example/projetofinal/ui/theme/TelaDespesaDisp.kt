@@ -1,16 +1,13 @@
 package com.example.projetofinal.ui.theme
 
-
 import android.app.Application
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.*
@@ -23,28 +20,30 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.projetofinal.R
 import com.example.projetofinal.viewModel.ListaViagemModel
 import com.example.projetofinal.viewModel.ListaViagemViewModel
 import com.example.projetofinal.viewModel.RegistroNovaDespesaViewModel
 import com.example.projetofinal.viewModel.RegistroNovaDespesaViewModelFactory
 
 @Composable
-fun telaViagemDisp(onNavigate : (route: String) ->Unit){
+fun telaDespesaDisp(){
 
     val application = LocalContext.current.applicationContext as Application
 
-    val viewModel: ListaViagemViewModel = viewModel(
-        factory = ListaViagemModel (application)
+    val viewModel : RegistroNovaDespesaViewModel = viewModel(
+        factory = RegistroNovaDespesaViewModelFactory(application)
     )
 
-    viewModel.buscarViagens()
+    viewModel.buscarDespesas()
+
 
     var openDialogRemove by remember { mutableStateOf(false) }
 
     ConfirmDelete(openDialog = openDialogRemove,
         onRemove = {
             openDialogRemove = false
-            viewModel.deleteViagem()
+            viewModel.deleteDespesa()
         },
         onClose = { openDialogRemove = false }
     )
@@ -56,7 +55,7 @@ fun telaViagemDisp(onNavigate : (route: String) ->Unit){
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Viagens Disponíveis",
+            text = "Despesasas da viagem",
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h5,
             color = Color.Black,
@@ -67,22 +66,22 @@ fun telaViagemDisp(onNavigate : (route: String) ->Unit){
         Spacer(modifier = Modifier.size(10.dp))
 
         LazyColumn() {
-            items(items = viewModel.viagens.value) {
+            items(items = viewModel.despesas.value) {
 
                 Card(
                     elevation = 4.dp,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(4.dp)
-                        .clickable {onNavigate("TelaDespesa")},
+                        .clickable {},
 
-                ) {
+                    ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         Image(
-                            painter = painterResource(com.example.projetofinal.R.drawable.imagem),
+                            painter = painterResource(R.drawable.imagem),
                             contentDescription = "",
                             contentScale = ContentScale.Crop,
                             modifier = Modifier
@@ -91,22 +90,26 @@ fun telaViagemDisp(onNavigate : (route: String) ->Unit){
                         )
                         Column(modifier = Modifier.weight(3f)) {
                             Text(
-                                text = "Destino :  ${it.destino}",
+                                text = "Data :  ${it.data}",
                                 style = MaterialTheme.typography.h6,
                                 textAlign = TextAlign.Start
                             )
                             Text(
-                                text = "De ${it.dataInicio} até ${it.dataFim}",
+                                text = "Valor : R$ ${it.valor}",
                             )
                             Text(
-                                text = "R$ ${it.orcamento}",
+                                text = "Tipo : ${it.tipo}",
                             )
+                            Text(
+                                text = "Descrição : ${it.descricao}",
+                            )
+
                             Spacer(Modifier.weight(1f))
 
                         }
                         IconButton(
                             onClick = {
-                                viewModel.viagemForDelete = it
+                                viewModel.despesaForDelete = it
                                 openDialogRemove = true
 
                             },
@@ -126,18 +129,18 @@ fun telaViagemDisp(onNavigate : (route: String) ->Unit){
     }
 }
 @Composable
-fun ConfirmDelete(openDialog: Boolean, onClose: () -> Unit, onRemove: () -> Unit) {
+fun ConfirmDeleteDespesa(openDialog: Boolean, onClose: () -> Unit, onRemove: () -> Unit) {
     if (openDialog) {
         AlertDialog(
             onDismissRequest = {
                 onClose()
             },
             title = {
-                Text(text = "Confirma deletar a viagem")
+                Text(text = "Confirma deletar a despesa")
             },
             text = {
                 Column() {
-                    Text("Você quer deletar a viagem")
+                    Text("Você quer deletar a despesa")
                 }
             },
             confirmButton = {

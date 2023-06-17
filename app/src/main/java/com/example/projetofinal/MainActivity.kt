@@ -76,6 +76,8 @@ fun DefaultPreview() {
             composable("TelaViagensDisp"){
                     telaViagemDisp(onNavigate = {navController.navigate(it)})
             }
+
+
         }
     }
 }

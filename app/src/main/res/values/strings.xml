@@ -15,4 +15,10 @@
     <string name="orcamento">Orçamento</string>
     <string name="feito">App feito por</string>
     <string name="eu">Leonardo Matheus</string>
+    <string name="dataDespesa">Data da despesa</string>
+    <string name="valorDespesa">Valor </string>
+    <string name="tipoDespesa">Tipo</string>
+    <string name="descricao">Descrição</string>
+    <string name="codigoViagem">Código da viagem</string>
+    <string name="listaDespesas">Lista despesas</string>
 </resources>
